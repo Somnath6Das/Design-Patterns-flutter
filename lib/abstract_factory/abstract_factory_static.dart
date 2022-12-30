@@ -2,13 +2,21 @@ import 'package:design_patterns/abstract_factory/platform_indicator.dart';
 import 'package:design_patterns/factory_method_pattern/factory_platform_Button.dart';
 import 'package:flutter/material.dart';
 
-abstract class AbstractFactory {
+abstract class AbstractFactoryStatic {
   Widget buildButton(BuildContext context, String text, VoidCallback onPressed);
   Widget buildIndicator(BuildContext context);
 }
 
-class AbstractFactoryImplementation implements AbstractFactory {
-  
+class AbstractFactoryImple implements AbstractFactoryStatic {
+  static AbstractFactoryImple? _instance;
+  AbstractFactoryImple._internal() {
+    print('static factory');
+  }
+
+  static AbstractFactoryImple get instance {
+    _instance ??= AbstractFactoryImple._internal();
+    return _instance!;
+  }
 
   @override
   Widget buildButton(

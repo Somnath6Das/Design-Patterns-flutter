@@ -1,4 +1,5 @@
 import 'package:design_patterns/abstract_factory/abstract_factory.dart';
+import 'package:design_patterns/abstract_factory/abstract_factory_static.dart';
 import 'package:design_patterns/abstract_factory/alternative_abstract_factory.dart';
 import 'package:design_patterns/factory_method_pattern/factory_Platform_Button.dart';
 import 'package:design_patterns/factory_method_pattern/factory_method.dart';
@@ -68,6 +69,10 @@ class MyApp extends StatelessWidget {
                 AlternativeAbstractFactory.buildButton(context, 'Hi', () {}),
                 const SizedBox(height: 10),
                 AlternativeAbstractFactory.buildIndicator(context),
+
+                // abstract factory static run only one time
+                AbstractFactoryImple.instance.buildIndicator(context),
+                AbstractFactoryImple.instance.buildButton(context, 'static', (){}),
               ],
             ),
           ),
