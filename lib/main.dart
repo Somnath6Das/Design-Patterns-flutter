@@ -3,6 +3,7 @@ import 'package:design_patterns/abstract_factory/abstract_factory_static.dart';
 import 'package:design_patterns/abstract_factory/alternative_abstract_factory.dart';
 import 'package:design_patterns/factory_method_pattern/factory_Platform_Button.dart';
 import 'package:design_patterns/factory_method_pattern/factory_method.dart';
+import 'package:design_patterns/prototype/prototype.dart';
 import 'package:design_patterns/singleton_design/singleton.dart';
 import 'package:design_patterns/singleton_design/singleton2.dart';
 import 'package:design_patterns/singleton_design/singleton3.dart';
@@ -37,12 +38,19 @@ class MyApp extends StatelessWidget {
     Singleton2 singleton6 = Singleton2.instance;
     Singleton2 singleton7 = Singleton2.instance;
 
-
     //factory method
     Singleton3 singleton8 = Singleton3();
     Singleton3 singleton9 = Singleton3();
     Singleton3 singleton10 = Singleton3();
     Singleton3 singleton11 = Singleton3();
+
+    // Prototype methods
+    Person person = const Person(
+        name: 'Somnath', lastName: 'Das', age: 35, nation: 'India');
+    Person person2 = person.clone();
+    print(person.name);
+    print(person2.name);
+
 
     return MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -72,7 +80,8 @@ class MyApp extends StatelessWidget {
 
                 // abstract factory static run only one time
                 AbstractFactoryImple.instance.buildIndicator(context),
-                AbstractFactoryImple.instance.buildButton(context, 'static', (){}),
+                AbstractFactoryImple.instance
+                    .buildButton(context, 'static', () {}),
               ],
             ),
           ),
