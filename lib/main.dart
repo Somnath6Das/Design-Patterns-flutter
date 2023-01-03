@@ -1,6 +1,7 @@
 import 'package:design_patterns/abstract_factory/abstract_factory.dart';
 import 'package:design_patterns/abstract_factory/abstract_factory_static.dart';
 import 'package:design_patterns/abstract_factory/alternative_abstract_factory.dart';
+import 'package:design_patterns/adapter/adapter.dart';
 import 'package:design_patterns/factory_method_pattern/factory_Platform_Button.dart';
 import 'package:design_patterns/factory_method_pattern/factory_method.dart';
 import 'package:design_patterns/prototype/prototype.dart';
@@ -18,9 +19,14 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     // all instances will run only once.
@@ -50,7 +56,6 @@ class MyApp extends StatelessWidget {
     Person person2 = person.clone();
     print(person.name);
     print(person2.name);
-
 
     return MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -82,9 +87,24 @@ class MyApp extends StatelessWidget {
                 AbstractFactoryImple.instance.buildIndicator(context),
                 AbstractFactoryImple.instance
                     .buildButton(context, 'static', () {}),
+
+                // adapter pattern
+                Expanded(
+                  child: ListView.builder(
+                      itemCount: postAPI.getPosts().length,
+                      itemBuilder: (context, index) {
+                        final posts = postAPI.getPosts()[index];
+                        return ListTile(
+                          title: Text(posts.title),
+                          subtitle: Text(posts.bio),
+                        );
+                      }),
+                )
               ],
             ),
           ),
         ));
   }
+
+  final PostAPI postAPI = PostAPI();
 }
